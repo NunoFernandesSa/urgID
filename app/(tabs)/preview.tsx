@@ -1,21 +1,23 @@
+import { Loader } from "@/components/ui/loader";
 import { MedicalCardPreview } from "@/components/ui/MedicalCardPreview";
 import { useMedicalInfo } from "@/hooks/useMedicalInfo";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Preview() {
-  const { medicalInfo, isLoading } = useMedicalInfo();
+  const { medicalInfo, isLoading, load } = useMedicalInfo();
   const insets = useSafeAreaInsets();
 
+  useFocusEffect(
+    useCallback(() => {
+      load();
+    }, [load]),
+  );
+
   if (isLoading) {
-    return (
-      <View style={[styles.safeArea, { paddingTop: insets.top }]}>
-        <View style={styles.center}>
-          <Text>Chargement de l&apos;aperçu...</Text>
-        </View>
-      </View>
-    );
+    return <Loader />;
   }
 
   return (
