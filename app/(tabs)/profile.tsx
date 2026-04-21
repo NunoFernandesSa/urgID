@@ -1,3 +1,5 @@
+import EmergencyContactsSection from "@/components/form/EmergencyContactsSection";
+import TreatmentsSection from "@/components/form/TreatmentsSection";
 import { useMedicalInfo } from "@/hooks/useMedicalInfo";
 import { EmergencyContact, emptyMedicalInfo, MedicalInfo } from "@/types";
 import { Picker } from "@react-native-picker/picker";
@@ -46,6 +48,16 @@ export default function Profile() {
     setForm((current) => ({ ...current, [key]: value }));
   };
 
+  // ***** Contact *****
+  const addContact = () => {
+    setForm((current) => ({
+      ...current,
+      emergencyContacts: [
+        ...current.emergencyContacts,
+        { name: "", phone: "" },
+      ],
+    }));
+  };
   const updateContact = (
     index: number,
     key: keyof EmergencyContact,
@@ -99,16 +111,6 @@ export default function Profile() {
     setForm((current) => ({
       ...current,
       treatments: current.treatments.filter((_, i) => i !== index),
-    }));
-  };
-
-  const addContact = () => {
-    setForm((current) => ({
-      ...current,
-      emergencyContacts: [
-        ...current.emergencyContacts,
-        { name: "", phone: "" },
-      ],
     }));
   };
 
@@ -193,75 +195,24 @@ export default function Profile() {
           />
         </View>
 
-        <Text style={styles.sectionTitle}>Allergies</Text>
-        {form.allergies.map((item, index) => (
-          <View key={`allergy-${index}`} style={styles.listRow}>
-            <TextInput
-              style={[styles.input, styles.flex]}
-              value={item}
-              onChangeText={(text) => updateAllergy(index, text)}
-              placeholder="Arachide"
-            />
-            <Pressable
-              onPress={() => removeAllergy(index)}
-              style={styles.smallButton}
-            >
-              <Text style={styles.smallButtonText}>X</Text>
-            </Pressable>
-          </View>
-        ))}
-        <Pressable style={styles.secondaryButton} onPress={addAllergy}>
-          <Text style={styles.secondaryButtonText}>+ Ajouter une allergie</Text>
-        </Pressable>
+        
 
-        <Text style={styles.sectionTitle}>Traitements</Text>
-        {form.treatments.map((item, index) => (
-          <View key={`treatment-${index}`} style={styles.listRow}>
-            <TextInput
-              style={[styles.input, styles.flex]}
-              value={item}
-              onChangeText={(text) => updateTreatment(index, text)}
-              placeholder="Insuline"
-            />
-            <Pressable
-              onPress={() => removeTreatment(index)}
-              style={styles.smallButton}
-            >
-              <Text style={styles.smallButtonText}>X</Text>
-            </Pressable>
-          </View>
-        ))}
-        <Pressable style={styles.secondaryButton} onPress={addTreatment}>
-          <Text style={styles.secondaryButtonText}>
-            + Ajouter un traitement
-          </Text>
-        </Pressable>
+        {/* ----- Treatments ----- */}
+        <TreatmentsSection
+          treatments={form.treatments}
+          onChange={updateTreatment}
+          onAdd={addTreatment}
+          onRemove={removeTreatment}
+        />
 
-        <Text style={styles.sectionTitle}>Contacts d&apos;urgence</Text>
-        {form.emergencyContacts.map((contact, index) => (
-          <View key={`contact-${index}`} style={styles.contactBlock}>
-            <Text style={styles.label}>Contact {index + 1}</Text>
-            <TextInput
-              style={styles.input}
-              value={contact.name}
-              onChangeText={(text) => updateContact(index, "name", text)}
-              placeholder="Nom"
-            />
-            <TextInput
-              style={styles.input}
-              value={contact.phone}
-              onChangeText={(text) => updateContact(index, "phone", text)}
-              placeholder="Téléphone"
-              keyboardType="phone-pad"
-            />
-          </View>
-        ))}
-        <Pressable style={styles.secondaryButton} onPress={addContact}>
-          <Text style={styles.secondaryButtonText}>
-            + Ajouter un contact d&apos;urgence
-          </Text>
-        </Pressable>
+        {/* ----- Emergency Contact ----- */}
+        <EmergencyContactsSection
+          contacts={form.emergencyContacts}
+          onChange={updateContact}
+          onAddContact={addContact}
+        />
 
+        {/* ----- Submit button ----- */}
         <Pressable style={styles.button} onPress={handleSave}>
           <Text style={styles.buttonText}>Enregistrer</Text>
         </Pressable>
