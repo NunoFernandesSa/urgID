@@ -25,11 +25,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="profile"
         options={{
-          title: "Explore",
+          title: "Profile",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <IconSymbol
+              size={28}
+              name="person.crop.circle.fill"
+              color={color}
+            />
           ),
         }}
       />
@@ -38,7 +42,7 @@ export default function TabLayout() {
         options={{
           title: "Preview",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <IconSymbol size={28} name="eye.fill" color={color} />
           ),
         }}
       />
