@@ -102,6 +102,16 @@ export default function Profile() {
     }));
   };
 
+  const addContact = () => {
+    setForm((current) => ({
+      ...current,
+      emergencyContacts: [
+        ...current.emergencyContacts,
+        { name: "", phone: "" },
+      ],
+    }));
+  };
+
   const handleSave = async () => {
     const cleanedForm: MedicalInfo = {
       ...form,
@@ -246,6 +256,11 @@ export default function Profile() {
             />
           </View>
         ))}
+        <Pressable style={styles.secondaryButton} onPress={addContact}>
+          <Text style={styles.secondaryButtonText}>
+            + Ajouter un contact d&apos;urgence
+          </Text>
+        </Pressable>
 
         <Pressable style={styles.button} onPress={handleSave}>
           <Text style={styles.buttonText}>Enregistrer</Text>
