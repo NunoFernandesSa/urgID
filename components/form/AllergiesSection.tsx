@@ -38,16 +38,6 @@ export default function AllergiesSection({
 }
 
 const styles = StyleSheet.create({
-  subtitle: {
-    fontSize: 16,
-    color: "#444",
-    marginBottom: 8,
-  },
-  label: {
-    fontSize: 15,
-    fontWeight: "700",
-    color: "#111",
-  },
   sectionTitle: {
     marginTop: 16,
     fontSize: 18,

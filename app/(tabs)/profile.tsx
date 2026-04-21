@@ -1,9 +1,9 @@
+import AllergiesSection from "@/components/form/AllergiesSection";
+import BloodTypeField from "@/components/form/BloodTypeField";
 import EmergencyContactsSection from "@/components/form/EmergencyContactsSection";
 import TreatmentsSection from "@/components/form/TreatmentsSection";
 import { useMedicalInfo } from "@/hooks/useMedicalInfo";
 import { EmergencyContact, emptyMedicalInfo, MedicalInfo } from "@/types";
-import { Picker } from "@react-native-picker/picker";
-
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -16,19 +16,6 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-const BLOOD_TYPE_OPTIONS = [
-  { label: "Non renseigné", value: null },
-  { label: "Inconnu", value: "unknown" },
-  { label: "A+", value: "A+" },
-  { label: "A-", value: "A-" },
-  { label: "B+", value: "B+" },
-  { label: "B-", value: "B-" },
-  { label: "AB+", value: "AB+" },
-  { label: "AB-", value: "AB-" },
-  { label: "O+", value: "O+" },
-  { label: "O-", value: "O-" },
-] as const;
 
 export default function Profile() {
   const { medicalInfo, save, isLoading } = useMedicalInfo();
@@ -48,7 +35,7 @@ export default function Profile() {
     setForm((current) => ({ ...current, [key]: value }));
   };
 
-  // ***** Contact *****
+  // ***** Contact ***** //
   const addContact = () => {
     setForm((current) => ({
       ...current,
@@ -70,13 +57,13 @@ export default function Profile() {
     });
   };
 
+  // ***** Allergy ***** //
   const addAllergy = () => {
     setForm((current) => ({
       ...current,
       allergies: [...current.allergies, ""],
     }));
   };
-
   const updateAllergy = (index: number, value: string) => {
     setForm((current) => {
       const allergies = [...current.allergies];
@@ -84,7 +71,6 @@ export default function Profile() {
       return { ...current, allergies };
     });
   };
-
   const removeAllergy = (index: number) => {
     setForm((current) => ({
       ...current,
@@ -92,13 +78,13 @@ export default function Profile() {
     }));
   };
 
+  // ***** Treatment ***** //
   const addTreatment = () => {
     setForm((current) => ({
       ...current,
       treatments: [...current.treatments, ""],
     }));
   };
-
   const updateTreatment = (index: number, value: string) => {
     setForm((current) => {
       const treatments = [...current.treatments];
@@ -106,7 +92,6 @@ export default function Profile() {
       return { ...current, treatments };
     });
   };
-
   const removeTreatment = (index: number) => {
     setForm((current) => ({
       ...current,
@@ -114,6 +99,7 @@ export default function Profile() {
     }));
   };
 
+  // ***** handleSave method ***** //
   const handleSave = async () => {
     const cleanedForm: MedicalInfo = {
       ...form,
@@ -128,6 +114,7 @@ export default function Profile() {
     router.push("/preview");
   };
 
+  // ***** Loading Screen ***** //
   if (isLoading) {
     return (
       <View style={styles.center}>
@@ -168,25 +155,13 @@ export default function Profile() {
           placeholder="7 ans"
         />
 
-        <Text style={styles.label}>Groupe sanguin</Text>
-        <View style={styles.pickerWrapper}>
-          <Picker
-            selectedValue={form.bloodType}
-            onValueChange={(value) =>
-              updateField("bloodType", value as MedicalInfo["bloodType"])
-            }
-            style={styles.picker}
-          >
-            {BLOOD_TYPE_OPTIONS.map((option) => (
-              <Picker.Item
-                key={String(option.value)}
-                label={option.label}
-                value={option.value}
-              />
-            ))}
-          </Picker>
-        </View>
+        {/* Blood Type */}
+        <BloodTypeField
+          bloodType={form.bloodType}
+          onChange={(value) => updateField("bloodType", value)}
+        />
 
+        {/* Organ donor */}
         <View style={styles.row}>
           <Text style={styles.label}>Donneur d&apos;organes</Text>
           <Switch
@@ -195,7 +170,13 @@ export default function Profile() {
           />
         </View>
 
-        
+        {/* Allergies */}
+        <AllergiesSection
+          allergies={form.allergies}
+          onChange={updateAllergy}
+          onAdd={addAllergy}
+          onRemove={removeAllergy}
+        />
 
         {/* ----- Treatments ----- */}
         <TreatmentsSection
