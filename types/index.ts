@@ -1,3 +1,8 @@
+export type EmergencyContact = {
+  name: string;
+  phone: string;
+};
+
 export type MedicalInfo = {
   id: string; // identifiant unique
   name: string; // prénom
@@ -12,12 +17,10 @@ export type MedicalInfo = {
     | "AB-"
     | "O+"
     | "O-"
-    | "unknown";
+    | "unknown"
+    | null;
   allergies: string[]; // ['arachide', 'pénicilline']
   treatments: string[]; // ['insuline', 'Lamictal']
-  emergencyContacts: {
-    name: string;
-    phone: string;
-  }[];
+  emergencyContacts: EmergencyContact[];
   isOrganDonor: boolean; // oui / non
 };
