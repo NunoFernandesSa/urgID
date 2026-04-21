@@ -1,11 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Colors } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme.web";
+import { StyleSheet, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Explore() {
+  const colorScheme = useColorScheme();
+
+  const textColor =
+    colorScheme === "light" ? Colors.light.text : Colors.dark.text;
+
   return (
-    <View>
-      <Text>Explore</Text>
-    </View>
+    <SafeAreaView>
+      <Text style={[styles.title, { color: textColor }]}>Explore</Text>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+});
