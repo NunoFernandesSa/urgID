@@ -24,3 +24,18 @@ export type MedicalInfo = {
   emergencyContacts: EmergencyContact[];
   isOrganDonor: boolean; // oui / non
 };
+
+export const emptyMedicalInfo: MedicalInfo = {
+  id: "",
+  name: "",
+  lastName: "",
+  age: "",
+  bloodType: null,
+  allergies: [],
+  treatments: [],
+  emergencyContacts: [
+    { name: "", phone: "" },
+    { name: "", phone: "" },
+  ],
+  isOrganDonor: false,
+};
