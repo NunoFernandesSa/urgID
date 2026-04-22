@@ -1,7 +1,16 @@
-import { MedicalInfo } from "@/types";
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
+// ----- Expo / React ----- //
 import React from "react";
 import { StyleSheet, Text, TextInput } from "react-native";
+// ----- Types ----- //
+import { MedicalInfo } from "@/types";
 
+// ----- Props Types ----- //
 type Props = {
   name: string;
   lastName: string;
@@ -12,6 +21,15 @@ type Props = {
   ) => void;
 };
 
+/**
+ * PersonalInfoSection renders a set of labeled inputs for entering
+ * a patient’s first name, last name and age/date of birth.
+ *
+ * @param {string} name – current value for the first-name field
+ * @param {string} lastName – current value for the last-name field
+ * @param {string} [age] – optional current value for the age/date-of-birth field
+ * @param {function} onChange – generic updater that syncs any MedicalInfo key with its new value
+ */
 export default function PersonalInfoSection({
   name,
   lastName,

@@ -1,15 +1,36 @@
-import { BLOOD_TYPE_OPTIONS } from "@/constants/theme";
-import { MedicalInfo } from "@/types";
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
+// ----- Expo / React ----- //
 import { Picker } from "@react-native-picker/picker";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+// ----- Types ----- //
+import { MedicalInfo } from "@/types";
+// ----- Constants ----- //
+import { BLOOD_TYPE_OPTIONS } from "@/constants/theme";
 
-// ----- Props -----
+// ----- Props ----- //
 type Props = {
   bloodType: string | null | undefined;
   onChange: (value: MedicalInfo["bloodType"]) => void;
 };
 
+/**
+ * BloodTypeField
+ *
+ * Renders a labeled picker for selecting the user's blood type.
+ *
+ * Props:
+ * - bloodType: The currently selected blood type value (string | null | undefined).
+ * - onChange: Callback fired when the picker value changes, receives the new blood type.
+ *
+ * The component presents a list of predefined blood type options and updates
+ * the parent state via the onChange handler.
+ */
 export default function BloodTypeField({ bloodType, onChange }: Props) {
   return (
     <>
@@ -33,7 +54,7 @@ export default function BloodTypeField({ bloodType, onChange }: Props) {
   );
 }
 
-// ----- Styles -----
+// ----- Styles ----- //
 const styles = StyleSheet.create({
   pickerWrapper: {
     backgroundColor: "#fff",

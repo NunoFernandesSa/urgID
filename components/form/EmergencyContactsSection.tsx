@@ -1,13 +1,31 @@
-import { EmergencyContact } from "@/types";
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
+// ----- Expo / React ----- //
 import React from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+// ----- Types ----- //
+import { EmergencyContact } from "@/types";
 
+// ----- Props Types ----- //
 type Props = {
   contacts: EmergencyContact[];
   onChange: (index: number, key: keyof EmergencyContact, value: string) => void;
   onAddContact: () => void;
 };
 
+/**
+ * EmergencyContactsSection renders a list of emergency contact inputs and an “add” button.
+ *
+ * Props:
+ * - contacts: Array of emergency contacts to display.
+ * - onChange: Callback fired when a contact field changes.
+ * - onAddContact: Callback fired when the user wants to add a new contact.
+ *
+ */
 export default function EmergencyContactsSection({
   contacts,
   onChange,
@@ -46,6 +64,7 @@ export default function EmergencyContactsSection({
   );
 }
 
+// ----- Styles ----- //
 const styles = StyleSheet.create({
   sectionTitle: {
     marginTop: 16,

@@ -1,9 +1,28 @@
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
+// ----- Expo / React ----- //
+import { JSX } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
-export function Loader({
-  title = "Carte médicale",
-  label = "Chargement sécurisé...",
-}) {
+// ----- Props types ----- //
+type Props = {
+  title: string;
+  label: string;
+};
+
+/**
+ * Loader component that displays a centered loading card with a title, spinner, and label.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.title - Title text displayed above the spinner.
+ * @param {string} props.label - Label text displayed below the spinner.
+ * @returns {JSX.Element} The rendered loader overlay.
+ */
+export function Loader({ title, label }: Props): JSX.Element {
   return (
     <View style={styles.overlay}>
       <View style={styles.card}>
@@ -16,6 +35,7 @@ export function Loader({
   );
 }
 
+// ----- Styles ----- //
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,

@@ -1,6 +1,14 @@
-import React from "react";
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
+// ----- Expo / React ----- //
+import React, { JSX } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
+// ----- Props Types ----- //
 type Props = {
   treatments: string[];
   onChange: (index: number, value: string) => void;
@@ -8,12 +16,22 @@ type Props = {
   onRemove: (index: number) => void;
 };
 
+/**
+ * TreatmentsSection renders a dynamic list of treatment text inputs.
+ * Users can edit, add, or remove treatments; changes are propagated via the provided callbacks.
+ *
+ * @param {string[]} treatments - Array of treatment names to display.
+ * @param {(index: number, value: string) => void} onChange - Callback fired when a treatment text changes.
+ * @param {() => void} onAdd - Callback fired when the “add treatment” button is pressed.
+ * @param {(index: number) => void} onRemove - Callback fired when a treatment is removed.
+ * @returns {JSX.Element} The treatments section UI.
+ */
 export default function TreatmentsSection({
   treatments,
   onChange,
   onAdd,
   onRemove,
-}: Props) {
+}: Props): JSX.Element {
   return (
     <>
       <Text style={styles.sectionTitle}>Traitements</Text>
@@ -37,6 +55,7 @@ export default function TreatmentsSection({
   );
 }
 
+// ----- Styles ----- //
 const styles = StyleSheet.create({
   sectionTitle: {
     marginTop: 16,

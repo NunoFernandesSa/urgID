@@ -1,6 +1,14 @@
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
+// ----- Expo / React ----- //
 import React from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
+// ----- Props Types ----- //
 type Props = {
   allergies: string[];
   onChange: (index: number, value: string) => void;
@@ -8,6 +16,17 @@ type Props = {
   onRemove: (index: number) => void;
 };
 
+/**
+ * AllergiesSection renders an editable list of allergy items.
+ *
+ * Props:
+ * - allergies: string[] – current list of allergy entries
+ * - onChange: (index, value) => void – update the allergy at the given index
+ * - onAdd: () => void – append a new empty allergy entry
+ * - onRemove: (index) => void – delete the allergy at the given index
+ *
+ * Provides a text input per allergy, a remove button, and an “Add” button.
+ */
 export default function AllergiesSection({
   allergies,
   onChange,

@@ -1,10 +1,23 @@
-import { MedicalInfo } from "@/types";
-import { StyleSheet, Text, View } from "react-native";
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
 
+// ----- Expo / React ----- //
+import { StyleSheet, Text, View } from "react-native";
+// ----- Expo / React ----- //
+import { MedicalInfo } from "@/types";
+
+// ----- Props types ----- //
 type Props = {
   data: MedicalInfo;
 };
 
+/**
+ * Renders a preview card displaying essential medical information.
+ * @param data - The medical data to display, including name, age, allergies, treatments, emergency contacts, and organ donor status.
+ */
 export function MedicalCardPreview({ data }: Props) {
   const allergiesText =
     data.allergies.length > 0
@@ -55,6 +68,7 @@ export function MedicalCardPreview({ data }: Props) {
   );
 }
 
+// ----- Styles ----- //
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
