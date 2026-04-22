@@ -3,6 +3,7 @@ import BloodTypeField from "@/components/form/BloodTypeField";
 import EmergencyContactsSection from "@/components/form/EmergencyContactsSection";
 import PersonalInfoSection from "@/components/form/PersonalInfoSection";
 import TreatmentsSection from "@/components/form/TreatmentsSection";
+import { Loader } from "@/components/ui/loader";
 import { useMedicalInfo } from "@/hooks/useMedicalInfo";
 import { EmergencyContact, emptyMedicalInfo, MedicalInfo } from "@/types";
 import { router } from "expo-router";
@@ -35,7 +36,6 @@ export default function Profile() {
     setForm((current) => ({ ...current, [key]: value }));
   };
 
-  // ***** Contact ***** //
   const addContact = () => {
     setForm((current) => ({
       ...current,
@@ -116,11 +116,7 @@ export default function Profile() {
 
   // ***** Loading Screen ***** //
   if (isLoading) {
-    return (
-      <View style={styles.center}>
-        <Text>Chargement...</Text>
-      </View>
-    );
+    return <Loader />;
   }
 
   return (
