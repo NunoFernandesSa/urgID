@@ -1,6 +1,7 @@
 import AllergiesSection from "@/components/form/AllergiesSection";
 import BloodTypeField from "@/components/form/BloodTypeField";
 import EmergencyContactsSection from "@/components/form/EmergencyContactsSection";
+import PersonalInfoSection from "@/components/form/PersonalInfoSection";
 import TreatmentsSection from "@/components/form/TreatmentsSection";
 import { useMedicalInfo } from "@/hooks/useMedicalInfo";
 import { EmergencyContact, emptyMedicalInfo, MedicalInfo } from "@/types";
@@ -12,7 +13,6 @@ import {
   StyleSheet,
   Switch,
   Text,
-  TextInput,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -126,34 +126,14 @@ export default function Profile() {
   return (
     <View style={[styles.safeArea, { paddingTop: insets.top }]}>
       <ScrollView contentContainerStyle={styles.container}>
+        {/* Header */}
         <Text style={styles.heading}>Profil médical</Text>
         <Text style={styles.subtitle}>
           Remplis les infos d&apos;urgence les plus importantes.
         </Text>
 
-        <Text style={styles.label}>Prénom</Text>
-        <TextInput
-          style={styles.input}
-          value={form.name}
-          onChangeText={(text) => updateField("name", text)}
-          placeholder="Léa"
-        />
-
-        <Text style={styles.label}>Nom</Text>
-        <TextInput
-          style={styles.input}
-          value={form.lastName}
-          onChangeText={(text) => updateField("lastName", text)}
-          placeholder="Martin"
-        />
-
-        <Text style={styles.label}>Âge / Date de naissance</Text>
-        <TextInput
-          style={styles.input}
-          value={form.age ?? ""}
-          onChangeText={(text) => updateField("age", text)}
-          placeholder="7 ans"
-        />
+        {/* Personal info */}
+        <PersonalInfoSection {...form} onChange={updateField} />
 
         {/* Blood Type */}
         <BloodTypeField
@@ -233,64 +213,11 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#111",
   },
-  input: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 12,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
+
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 8,
-  },
-  listRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  flex: {
-    flex: 1,
-  },
-  pickerWrapper: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 12,
-    overflow: "hidden",
-  },
-  picker: {
-    height: 56,
-    width: "100%",
-  },
-  smallButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor: "#b00020",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  smallButtonText: {
-    color: "#fff",
-    fontWeight: "800",
-  },
-  secondaryButton: {
-    backgroundColor: "#eaeaea",
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: "center",
-  },
-  secondaryButtonText: {
-    color: "#111",
-    fontWeight: "700",
-  },
-  contactBlock: {
-    gap: 8,
     marginTop: 8,
   },
   button: {
@@ -304,10 +231,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "700",
-  },
-  center: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
