@@ -29,6 +29,7 @@ export default function Profile() {
     }
   }, [medicalInfo]);
 
+  // ----- Update field method ----- //
   const updateField = <K extends keyof MedicalInfo>(
     key: K,
     value: MedicalInfo[K],
@@ -36,6 +37,7 @@ export default function Profile() {
     setForm((current) => ({ ...current, [key]: value }));
   };
 
+  // ---- Emergency contact ----- //
   const addContact = () => {
     setForm((current) => ({
       ...current,
@@ -57,7 +59,7 @@ export default function Profile() {
     });
   };
 
-  // ***** Allergy ***** //
+  // ----- Allergy ----- //
   const addAllergy = () => {
     setForm((current) => ({
       ...current,
@@ -78,7 +80,7 @@ export default function Profile() {
     }));
   };
 
-  // ***** Treatment ***** //
+  // ----- Treatment ----- //
   const addTreatment = () => {
     setForm((current) => ({
       ...current,
@@ -99,7 +101,7 @@ export default function Profile() {
     }));
   };
 
-  // ***** handleSave method ***** //
+  // ----- handleSave method ----- //
   const handleSave = async () => {
     const cleanedForm: MedicalInfo = {
       ...form,
@@ -114,9 +116,9 @@ export default function Profile() {
     router.push("/preview");
   };
 
-  // ***** Loading Screen ***** //
+  // ----- Loading Screen ----- //
   if (isLoading) {
-    return <Loader />;
+    return <Loader title="" label="" />;
   }
 
   return (

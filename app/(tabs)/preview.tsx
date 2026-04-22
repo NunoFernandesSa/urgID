@@ -17,7 +17,7 @@ export default function Preview() {
   );
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader title="" label="" />;
   }
 
   return (

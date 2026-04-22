@@ -1,9 +1,18 @@
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme.web";
+import { JSX } from "react";
 import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function HomeScreen() {
+/**
+ * Renders the home screen component for the application.
+ *
+ * This component displays a simple "Home" text within a SafeAreaView,
+ * adapting the text color based on the current color scheme (light or dark).
+ *
+ * @returns A JSX element representing the home screen.
+ */
+export default function HomeScreen(): JSX.Element {
   const colorScheme = useColorScheme();
 
   const textColor =
