@@ -4,6 +4,7 @@ import EmergencyContactsSection from "@/components/form/EmergencyContactsSection
 import PersonalInfoSection from "@/components/form/PersonalInfoSection";
 import TreatmentsSection from "@/components/form/TreatmentsSection";
 import { Loader } from "@/components/ui/loader";
+import { sanitizePhone, sanitizeText } from "@/helpers";
 import { useMedicalInfo } from "@/hooks/useMedicalInfo";
 import { EmergencyContact, emptyMedicalInfo, MedicalInfo } from "@/types";
 import { router } from "expo-router";
@@ -23,6 +24,8 @@ export default function Profile() {
   const insets = useSafeAreaInsets();
   const [form, setForm] = useState<MedicalInfo>(emptyMedicalInfo);
 
+  const cleanText = (value: string) => value.trim().slice(0, 80);
+
   useEffect(() => {
     if (medicalInfo) {
       setForm(medicalInfo);
@@ -34,7 +37,10 @@ export default function Profile() {
     key: K,
     value: MedicalInfo[K],
   ) => {
-    setForm((current) => ({ ...current, [key]: value }));
+    setForm((current) => ({
+      ...current,
+      [key]: typeof value === "string" ? cleanText(value) : value,
+    }));
   };
 
   // ---- Emergency contact ----- //
@@ -105,11 +111,21 @@ export default function Profile() {
   const handleSave = async () => {
     const cleanedForm: MedicalInfo = {
       ...form,
-      allergies: form.allergies.filter(Boolean),
-      treatments: form.treatments.filter(Boolean),
-      emergencyContacts: form.emergencyContacts.filter(
-        (c) => c.name.trim() || c.phone.trim(),
-      ),
+      name: sanitizeText(form.name, 40),
+      lastName: sanitizeText(form.lastName, 40),
+      age: sanitizeText(form.age ?? "", 20),
+      allergies: form.allergies
+        .map((item) => sanitizeText(item, 80))
+        .filter(Boolean),
+      treatments: form.treatments
+        .map((item) => sanitizeText(item, 80))
+        .filter(Boolean),
+      emergencyContacts: form.emergencyContacts
+        .map((c) => ({
+          name: sanitizeText(c.name, 60),
+          phone: sanitizePhone(c.phone),
+        }))
+        .filter((c) => c.name || c.phone),
     };
 
     await save(cleanedForm);
