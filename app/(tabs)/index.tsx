@@ -25,6 +25,7 @@ export default function HomeScreen(): JSX.Element {
   );
 }
 
+// ----- Styles ----- //
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
