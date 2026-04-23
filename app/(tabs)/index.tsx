@@ -1,5 +1,3 @@
-import {Colors} from "@/constants/theme";
-import {useColorScheme} from "@/hooks/use-color-scheme.web";
 import {JSX, useMemo} from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
@@ -8,16 +6,14 @@ import {Loader} from "@/components/ui/loader";
 import {router} from "expo-router";
 
 /**
- * Home screen
- * @returns {JSX.Element} - Returns the home screen component
+ * Renders the home screen component.
+ *
+ * @return {JSX.Element} The home screen component.
  */
 export default function HomeScreen(): JSX.Element {
-    const colorScheme = useColorScheme();
     const {medicalInfo, isLoading} = useMedicalInfo();
     const insets = useSafeAreaInsets();
 
-    const textColor =
-        colorScheme === "light" ? Colors.light.text : Colors.dark.text;
 
     const hasData = useMemo(() => {
         return !!(
@@ -45,7 +41,7 @@ export default function HomeScreen(): JSX.Element {
                         Ta carte médicale d&apos;urgence, accessible en un coup d&apos;œil.
                     </Text>
                 </View>
-
+                
                 {!hasData ? (
                     <View style={styles.emptyCard}>
                         <Text style={styles.emptyTitle}>Aucune fiche enregistrée</Text>
