@@ -1,5 +1,5 @@
-import {router} from "expo-router";
-import {useMemo} from "react";
+import {router, useFocusEffect} from "expo-router";
+import {useCallback, useMemo} from "react";
 import {
     Pressable,
     ScrollView,
@@ -15,10 +15,18 @@ import {Loader} from "@/components/ui/loader";
 
 
 export default function Home() {
-    const {medicalInfo, isLoading} = useMedicalInfo();
+    const {medicalInfo, isLoading, load} = useMedicalInfo();
     const insets = useSafeAreaInsets();
 
-    const hasData = useMemo(() => {
+    // ----- Effect for load data ----- //
+    useFocusEffect(
+        useCallback((): void => {
+            load();
+        }, [load])
+    );
+
+    // ----- has data ----- //
+    const hasData: boolean = useMemo(() => {
         return !!(
             medicalInfo?.name ||
             medicalInfo?.lastName ||
@@ -29,6 +37,7 @@ export default function Home() {
         );
     }, [medicalInfo]);
 
+    // ----- if Loading show Loader ----- //
     if (isLoading) {
         return (
             <Loader title={"Chargement..."}/>
@@ -148,6 +157,7 @@ export default function Home() {
     );
 }
 
+// ----- Styles ---- //
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
