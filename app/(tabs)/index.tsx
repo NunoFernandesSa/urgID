@@ -147,23 +147,17 @@ export default function Home(): JSX.Element {
                             <ActionCard
                                 title="Aperçu"
                                 subtitle="Voir le rendu widget"
-                                onPress={() => router.push("/preview")}
+                                onPress={() => router.push("/emergency")}
                                 tone="dark"
                             />
                         </View>
-
-                        <Pressable
-                            style={styles.primaryButton}
-                            onPress={() => router.push("/preview")}
-                        >
-                            <Text style={styles.primaryButtonText}>Voir la carte complète</Text>
-                        </Pressable>
                     </>
                 )}
             </ScrollView>
         </View>
     );
 }
+
 
 // ----- Styles ---- //
 const styles = StyleSheet.create({

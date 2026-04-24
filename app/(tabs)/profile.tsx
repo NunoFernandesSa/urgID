@@ -138,7 +138,7 @@ export default function Profile(): JSX.Element {
         };
 
         await save(cleanedForm);
-        router.push("/preview");
+        router.back();
     };
 
     // ----- Loading Screen ----- //
