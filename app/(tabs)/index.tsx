@@ -1,5 +1,5 @@
 import {router, useFocusEffect} from "expo-router";
-import {useCallback, useMemo} from "react";
+import {JSX, useCallback, useMemo} from "react";
 import {
     Pressable,
     ScrollView,
@@ -14,7 +14,15 @@ import ActionCard from "@/components/ui/action-card";
 import {Loader} from "@/components/ui/loader";
 
 
-export default function Home() {
+/**
+ * @description
+ * This component is the main screen of the app.
+ * It displays the user's medical information in a card format and allows the user to navigate to the profile screen.
+ * The user's medical information is loaded from persistent storage when the component is focused.
+ *
+ * @return {JSX.Element} The main screen component.
+ */
+export default function Home(): JSX.Element {
     const {medicalInfo, isLoading, load} = useMedicalInfo();
     const insets = useSafeAreaInsets();
 
@@ -226,24 +234,6 @@ const styles = StyleSheet.create({
     statsRow: {
         flexDirection: "row",
         gap: 10,
-    },
-    pill: {
-        flex: 1,
-        backgroundColor: "rgba(255,255,255,0.08)",
-        borderRadius: 18,
-        paddingVertical: 14,
-        alignItems: "center",
-        gap: 3,
-    },
-    pillValue: {
-        color: "#fff",
-        fontSize: 22,
-        fontWeight: "900",
-    },
-    pillLabel: {
-        color: "#CBD5E1",
-        fontSize: 12,
-        fontWeight: "600",
     },
     summaryCard: {
         backgroundColor: "#fff",

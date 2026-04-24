@@ -1,6 +1,12 @@
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-22
+ */
+
 // ----- Expo / React ----- //
 import {StyleSheet, Text, Pressable} from 'react-native'
-import React from 'react'
+import React, {JSX} from 'react'
 
 // ----- Props ----- //
 type Props = {
@@ -10,7 +16,17 @@ type Props = {
     tone?: "light" | "dark";
 }
 
-export default function ActionCard({title, subtitle, onPress, tone}: Props) {
+/**
+ * ActionCard component displays a clickable card with a title and subtitle.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.title - The title text displayed on the card.
+ * @param {string} props.subtitle - The subtitle text displayed on the card.
+ * @param {() => void} props.onPress - The function called when the card is pressed.
+ * @param {"light" | "dark"} [props.tone="light"] - The tone of the card, either "light" or "dark".
+ * @returns {JSX.Element} The rendered action card component.
+ */
+export default function ActionCard({title, subtitle, onPress, tone}: Props): JSX.Element {
     return (
         <Pressable
             onPress={onPress}

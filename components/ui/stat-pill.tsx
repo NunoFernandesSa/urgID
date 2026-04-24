@@ -1,3 +1,9 @@
+/**
+ * @License : MIT
+ * @Author : Nuno F.
+ * @Date : 2026-04-24
+ */
+
 // ----- Expo / React ----- //
 import React from 'react'
 import {StyleSheet, Text, View} from "react-native";
