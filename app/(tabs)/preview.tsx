@@ -2,11 +2,20 @@ import {Loader} from "@/components/ui/loader";
 import {MedicalCardPreview} from "@/components/ui/medical-card-preview";
 import {useMedicalInfo} from "@/hooks/useMedicalInfo";
 import {router, useFocusEffect} from "expo-router";
-import {useCallback} from "react";
+import {JSX, useCallback} from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
-export default function Preview() {
+
+/**
+ * @description
+ * This component is the preview screen of the app.
+ * It displays the user's medical information in a card format.
+ * The user's medical information is loaded from persistent storage when the component is focused.
+ *
+ * @return {JSX.Element} The preview screen component.
+ */
+export default function Preview(): JSX.Element {
     const {medicalInfo, isLoading, load} = useMedicalInfo();
     const insets = useSafeAreaInsets();
 
